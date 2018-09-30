@@ -44,7 +44,7 @@ venueid smallint not null,
 catid smallint not null,
 dateid smallint not null sortkey,
 eventname varchar(200),
-starttime timestamp);'
+starttime timestamp);`
 
 Load the data to Event table (small table, less than 10K records):
 
