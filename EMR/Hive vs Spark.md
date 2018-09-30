@@ -72,6 +72,9 @@ order by l_shipmode;`
 
 Time taken: 299.054 seconds, Fetched: 2 row(s)
 
+![](https://laiase.com/png/Hive-Spark-Result.png)
+
+
 Exit Hive by:
 
   `quit;`
