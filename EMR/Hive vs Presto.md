@@ -31,11 +31,11 @@ Run below query:
 
   `Select l_shipdate, sum(l_discount) as total_discount from lineitem_presto_vs_hive_test group by l_shipdate;`
 
-1992-04-11	1041.5200000000004
-...
-...
-1998-10-21	437.75000000000085
-1998-11-18	145.89999999999984
+>1992-04-11	1041.5200000000004
+>...
+>...
+>1998-10-21	437.75000000000085
+>1998-11-18	145.89999999999984
 
 Time taken: 186.084 seconds, Fetched: 2527 row(s)
 
