@@ -2,11 +2,11 @@ SSH to EMR master node
 
   ssh -i ~/your-key-name.pem hadoop@ec2-000-000-000-000.compute-1.amazonaws.com
 
-Hive
+````Hive
 
 Run below command to create the external table:
 
-create external table orders_hive_vs_spark_test
+````create external table orders_hive_vs_spark_test
 (O_ORDERKEY INT, 
 O_CUSTKEY INT, 
 O_ORDERSTATUS STRING, 
