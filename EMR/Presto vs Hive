@@ -59,3 +59,4 @@ Splits: 323 total, 323 done (100.00%)
 You can see the Presto dashboard at:
 http://ec2-000-000-000-000.compute-1.amazonaws.com:8889/
 
+Testing result, Presto is faster, difference may vary based on the node type and cluster size.
