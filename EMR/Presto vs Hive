@@ -52,9 +52,9 @@ Start Presto and execute the same query
 
   Select l_shipdate, sum(l_discount) as total_discount from lineitem_presto_vs_hive_test group by l_shipdate;
 
-Query 20180930_131159_00004_8ir9m, FINISHED, 2 nodes
+Query 20180930_131803_00006_8ir9m, FINISHED, 2 nodes
 Splits: 323 total, 323 done (100.00%)
-5:40 [75M rows, 8.87GB] [221K rows/s, 26.7MB/s]
+1:57 [75M rows, 8.87GB] [642K rows/s, 77.8MB/s]
 
 You can see the Presto dashboard at:
 http://ec2-000-000-000-000.compute-1.amazonaws.com:8889/
