@@ -118,4 +118,5 @@ Testing result, Spark is much more faster, difference may vary based on the node
 Please note there is time that required for caching, and please unpersist the cache after the test.
 
 Same query can be run directly on Athena, the result: (Run time: 7.95 seconds, Data scanned: 17.74GB)
+![](https://laiase.com/png/Athena+Result.png)
 
