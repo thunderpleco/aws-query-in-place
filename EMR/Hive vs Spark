@@ -102,6 +102,8 @@ Time taken: 106.237 seconds, Fetched 2 row(s)
 
 free up the cache by:
   unpersist;
+once cleaned accumulator... quit spark-sql:
+  quit;
 
 
 Testing result, Spark is much more faster, difference may vary based on the node type and cluster size.
