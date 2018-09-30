@@ -1,12 +1,12 @@
 SSH to EMR master node
 
-  ssh -i ~/your-key-name.pem hadoop@ec2-000-000-000-000.compute-1.amazonaws.com
+`ssh -i ~/your-key-name.pem hadoop@ec2-000-000-000-000.compute-1.amazonaws.com`
 
-Hive
+`hive`
 
 Run below command to create the external table:
 
-  create external table lineitem_presto_vs_hive_test (
+  `create external table lineitem_presto_vs_hive_test (
   L_ORDERKEY INT,
   L_PARTKEY INT,
   L_SUPPKEY INT,
@@ -23,13 +23,13 @@ Run below command to create the external table:
   L_SHIPINSTRUCT STRING,
   L_SHIPMODE STRING, L_COMMENT STRING)
   ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
-  LOCATION 's3://bigdatalabridge/emrdata/';
+  LOCATION 's3://bigdatalabridge/emrdata/';`
 
 Time taken: 10.547 seconds
 
 Run below query:
 
-  Select l_shipdate, sum(l_discount) as total_discount from lineitem_presto_vs_hive_test group by l_shipdate;
+  `Select l_shipdate, sum(l_discount) as total_discount from lineitem_presto_vs_hive_test group by l_shipdate;`
 
 1992-04-11	1041.5200000000004
 ...
@@ -41,22 +41,27 @@ Time taken: 186.084 seconds, Fetched: 2527 row(s)
 
 Exit Hive by:
 
-  quit;
+  `quit;`
 
 
 Start Presto and execute the same query
 
-  presto-cli
+  `presto-cli`
 
-  use hive.default;
+  `use hive.default;`
 
-  Select l_shipdate, sum(l_discount) as total_discount from lineitem_presto_vs_hive_test group by l_shipdate;
+  `Select l_shipdate, sum(l_discount) as total_discount from lineitem_presto_vs_hive_test group by l_shipdate;`
 
 Query 20180930_131803_00006_8ir9m, FINISHED, 2 nodes
+
 Splits: 323 total, 323 done (100.00%)
+
 1:57 [75M rows, 8.87GB] [642K rows/s, 77.8MB/s]
 
 You can see the Presto dashboard at:
-http://ec2-000-000-000-000.compute-1.amazonaws.com:8889/
+`http://ec2-000-000-000-000.compute-1.amazonaws.com:8889/`
+
+![](https://laiase.com/png/Presto-dashboard.png)
+
 
 Testing result, Presto is faster, difference may vary based on the node type and cluster size.
