@@ -70,13 +70,11 @@ where
 group by l_shipmode
 order by l_shipmode;`
 
-
 Time taken: 299.054 seconds, Fetched: 2 row(s)
 
 Exit Hive by:
 
   `quit;`
-
 
 Spark-sql is compatible with Hive metadata store, table created in Hive can be used directly by Spark-sql
 
@@ -87,23 +85,32 @@ Start Spark and execute the same query
 Then, load the tables into memory
 
 `cache table orders_hive_vs_spark_test;`
+
 Time taken: 536.678 seconds
 
 `cache table lineitem_hive_vs_spark_test;`
+
 Time taken: 1005.38 seconds
 
 
 Run the same query above:
 ......
+
 MAIL	62265	875315
+
 SHIP	62260	872950
+
 Time taken: 106.237 seconds, Fetched 2 row(s)
 
 
+
 free up the cache by:
-  `unpersist;`
+
+`unpersist;`
+
 once cleaned accumulator... quit spark-sql:
-  `quit;`
+
+`quit;`
 
 
 Testing result, Spark is much more faster, difference may vary based on the node type and cluster size.
