@@ -199,37 +199,37 @@ table properties ('numRows'='172000');`
 
 `alter table spectrum.sales_event
 add partition(salesmonth='2008-01', event='101') 
-location 's3://awssampledbuswest2/tickit/spectrum/salesevent/salesmonth=2008-01/event=101/';
+location 's3://awssampledbuswest2/tickit/spectrum/salesevent/salesmonth=2008-01/event=101/';`
 
-alter table spectrum.sales_event
+`alter table spectrum.sales_event
 add partition(salesmonth='2008-01', event='102') 
-location 's3://awssampledbuswest2/tickit/spectrum/salesevent/salesmonth=2008-01/event=102/';
+location 's3://awssampledbuswest2/tickit/spectrum/salesevent/salesmonth=2008-01/event=102/';`
 
-alter table spectrum.sales_event
+`alter table spectrum.sales_event
 add partition(salesmonth='2008-01', event='103') 
-location 's3://awssampledbuswest2/tickit/spectrum/salesevent/salesmonth=2008-01/event=103/';
+location 's3://awssampledbuswest2/tickit/spectrum/salesevent/salesmonth=2008-01/event=103/';`
 
-alter table spectrum.sales_event
+`alter table spectrum.sales_event
 add partition(salesmonth='2008-02', event='101') 
 location 's3://awssampledbuswest2/tickit/spectrum/salesevent/salesmonth=2008-02/event=101/';
 
-alter table spectrum.sales_event
+`alter table spectrum.sales_event
 add partition(salesmonth='2008-02', event='102') 
-location 's3://awssampledbuswest2/tickit/spectrum/salesevent/salesmonth=2008-02/event=102/';
+location 's3://awssampledbuswest2/tickit/spectrum/salesevent/salesmonth=2008-02/event=102/';`
 
-alter table spectrum.sales_event
+`alter table spectrum.sales_event
 add partition(salesmonth='2008-02', event='103') 
-location 's3://awssampledbuswest2/tickit/spectrum/salesevent/salesmonth=2008-02/event=103/';
+location 's3://awssampledbuswest2/tickit/spectrum/salesevent/salesmonth=2008-02/event=103/';`
 
-alter table spectrum.sales_event
+`alter table spectrum.sales_event
 add partition(salesmonth='2008-03', event='101') 
-location 's3://awssampledbuswest2/tickit/spectrum/salesevent/salesmonth=2008-03/event=101/';
+location 's3://awssampledbuswest2/tickit/spectrum/salesevent/salesmonth=2008-03/event=101/';`
 
-alter table spectrum.sales_event
+`alter table spectrum.sales_event
 add partition(salesmonth='2008-03', event='102') 
-location 's3://awssampledbuswest2/tickit/spectrum/salesevent/salesmonth=2008-03/event=102/';
+location 's3://awssampledbuswest2/tickit/spectrum/salesevent/salesmonth=2008-03/event=102/';`
 
-alter table spectrum.sales_event
+`alter table spectrum.sales_event
 add partition(salesmonth='2008-03', event='103') 
 location 's3://awssampledbuswest2/tickit/spectrum/salesevent/salesmonth=2008-03/event=103/';`
 
