@@ -309,7 +309,8 @@ location 's3://awssampledbuswest2/tickit/spectrum/salesevent/salesmonth=2008-03/
 Run the following query to select data from the partitioned table.
 
 
-```select spectrum.sales_event.salesmonth, event.eventname, sum(spectrum.sales_event.pricepaid) 
+```sql
+select spectrum.sales_event.salesmonth, event.eventname, sum(spectrum.sales_event.pricepaid) 
 from spectrum.sales_event, event
 where spectrum.sales_event.eventid = event.eventid
   and salesmonth = '2008-02'
