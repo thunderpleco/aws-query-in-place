@@ -6,11 +6,14 @@ Create the external table, once done, you will be able to see this database "spe
 from data catalog 
 database 'spectrumdb' 
 iam_role 'arn:aws:iam::123456789012:role/mySpectrumRole'
-create external database if not exists;```
+create external database if not exists;
+```
+
 
 To verify, you can check it at Athena console, or run the below query in SQL Workbench/J
 
-`select * from svv_external_schemas where schemaname='spectrum';`
+```select * from svv_external_schemas where schemaname='spectrum';
+```
 
 
 Then, we create the sales table, once its done, you can directly query it from Athena (Keep your larger fact tables in Amazon S3 and your smaller dimension tables in Amazon Redshift, as a best practice:
@@ -67,18 +70,20 @@ order by 2 desc;`
 
 View the query plan for the previous query. Note the S3 Seq Scan, S3 HashAggregate, and S3 Query Scan steps that were executed against the data on Amazon S3.
 
-`explain
+```explain
 select top 10 spectrum.sales.eventid, sum(spectrum.sales.pricepaid) 
 from spectrum.sales, event
 where spectrum.sales.eventid = event.eventid
 and spectrum.sales.pricepaid > 30
 group by spectrum.sales.eventid
-order by 2 desc;`
+order by 2 desc;
+```
 
 
 By default, Amazon Redshift creates external tables with the pseudocolumns $path and $size. Select these columns to view the path to the data files on Amazon S3 and the size of the data files for each row returned by a query. 
 
-`select "$path", "$size" from spectrum.sales where dateid = '1983';`
+```select "$path", "$size" from spectrum.sales where dateid = '1983';
+```
 
 
 Question? Does above query incur charges?
@@ -86,7 +91,7 @@ Question? Does above query incur charges?
 ###
 Create an external table that is partitioned by month
 
-`create external table spectrum.sales_part(
+```create external table spectrum.sales_part(
 salesid integer,
 listid integer,
 sellerid integer,
@@ -102,7 +107,8 @@ row format delimited
 fields terminated by '|'
 stored as textfile
 location 's3://awssampledbuswest2/tickit/spectrum/sales_partition/'
-table properties ('numRows'='172000');`
+table properties ('numRows'='172000');
+```
 
 
 `alter table spectrum.sales_part
@@ -163,13 +169,14 @@ where tablename = 'sales_part';`
 Run the following query to select data from the partitioned table.
 
 
-`select top 5 spectrum.sales_part.eventid, sum(spectrum.sales_part.pricepaid) 
+```select top 5 spectrum.sales_part.eventid, sum(spectrum.sales_part.pricepaid) 
 from spectrum.sales_part, event
 where spectrum.sales_part.eventid = event.eventid
   and spectrum.sales_part.pricepaid > 30
   and saledate = '2008-01'
 group by spectrum.sales_part.eventid
-order by 2 desc;`
+order by 2 desc;
+```
 
 
 
@@ -177,7 +184,7 @@ order by 2 desc;`
 To create an external table partitioned by date and eventid, run the following command.
 
 
-`create external table spectrum.sales_event(
+```create external table spectrum.sales_event(
 salesid integer,
 listid integer,
 sellerid integer,
@@ -193,7 +200,8 @@ row format delimited
 fields terminated by '|'
 stored as textfile
 location 's3://awssampledbuswest2/tickit/spectrum/salesevent/'
-table properties ('numRows'='172000');`
+table properties ('numRows'='172000');
+```
 
 
 
@@ -238,7 +246,7 @@ location 's3://awssampledbuswest2/tickit/spectrum/salesevent/salesmonth=2008-03/
 Run the following query to select data from the partitioned table.
 
 
-`select spectrum.sales_event.salesmonth, event.eventname, sum(spectrum.sales_event.pricepaid) 
+```select spectrum.sales_event.salesmonth, event.eventname, sum(spectrum.sales_event.pricepaid) 
 from spectrum.sales_event, event
 where spectrum.sales_event.eventid = event.eventid
   and salesmonth = '2008-02'
@@ -246,7 +254,8 @@ where spectrum.sales_event.eventid = event.eventid
 	or event = '102'
 	or event = '103')
 group by event.eventname, spectrum.sales_event.salesmonth
-order by 3 desc;`
+order by 3 desc;
+```
 
 
 
