@@ -47,17 +47,17 @@ Sample File Location: The two files are available in a public s3 bucket: anson-u
 5. Upload the sample data file to the vault mentioned in step 4: airport-code-large.csv. Record the archive id for input to the python script. 
 E.g. run below CLI to upload a file to Glacier:
 
-`aws glacier upload-archive --vault-name builder0-vault1 --account-id - --body airport-code-large.csv`
+```aws glacier upload-archive --vault-name builder0-vault1 --account-id - --body airport-code-large.csv```
 
 The output of the CLI looks like below, which contain the archieveID:
 
-`
+```
 {
     "location": "/889111795564/vaults/builder0-vault1/archives/TnsNS4AF_Bo2VkQybTCQHcgoz1PbhKuQoPySP1wu8B_TTlKHkn9pjBizsTNvT0nv4mDGypAZLy36qitLaGWj7G45VyBw_oFR8OUHoIuJZuGfF7lUJh8Spwht4ddN6R7j4lGaOMcoYw",
     "checksum": "da7aac2dc381c0acbe6146d7117f552e09c4e575d116e13ee6dadde5555779b1",
     "archiveId": "TnsNS4AF_Bo2VkQybTCQHcgoz1PbhKuQoPySP1wu8B_TTlKHkn9pjBizsTNvT0nv4mDGypAZLy36qitLaGWj7G45VyBw_oFR8OUHoIuJZuGfF7lUJh8Spwht4ddN6R7j4lGaOMcoYw"
 }
-`
+```
 
 6. Create a glacier select output bucket in us-east-1 region. Record the bucket name and bucket prefix for input to the python script. 
 
@@ -100,7 +100,7 @@ Sample File Location: Amazon S3 bucket named s3://aws-bigdata-blog/artifacts/glu
 11. You can query the data using standard SQL.
 
     Choose the nytaxigreenparquet
-    Type `sql Select * From "nycitytaxi"."data" limit 10;`
+    Type ```sql Select * From "nycitytaxi"."data" limit 10;```
     Choose Run Query.
 
 
