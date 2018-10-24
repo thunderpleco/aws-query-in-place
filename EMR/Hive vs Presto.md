@@ -6,7 +6,8 @@ SSH to EMR master node
 
 Run below command to create the external table:
 
-`create external table lineitem_presto_vs_hive_test (
+```sql
+create external table lineitem_presto_vs_hive_test (
 L_ORDERKEY INT,
 L_PARTKEY INT,
 L_SUPPKEY INT,
@@ -23,13 +24,16 @@ L_RECEIPTDATE STRING,
 L_SHIPINSTRUCT STRING,
 L_SHIPMODE STRING, L_COMMENT STRING)
 ROW FORMAT DELIMITED FIELDS TERMINATED BY '|'
-LOCATION 's3://bigdatalabridge/emrdata/';`
+LOCATION 's3://bigdatalabridge/emrdata/';
+```
 
 Time taken: 10.547 seconds
 
 Run below query:
 
-  `Select l_shipdate, sum(l_discount) as total_discount from lineitem_presto_vs_hive_test group by l_shipdate;`
+  ```sql
+  Select l_shipdate, sum(l_discount) as total_discount from lineitem_presto_vs_hive_test group by l_shipdate;
+  ```
 
 >1992-04-11	1041.5200000000004
 
@@ -54,7 +58,9 @@ Start Presto and execute the same query
 
   `use hive.default;`
 
-  `Select l_shipdate, sum(l_discount) as total_discount from lineitem_presto_vs_hive_test group by l_shipdate;`
+  ```sql
+  Select l_shipdate, sum(l_discount) as total_discount from lineitem_presto_vs_hive_test group by l_shipdate;
+  ```
 
 Query 20180930_131803_00006_8ir9m, FINISHED, 2 nodes
 
