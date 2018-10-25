@@ -2,20 +2,21 @@ Start EMR cluster with release 5.17.0 or above.
 
 Assume we have a file located in S3 folder "reinvent2018-emr-presto-s3-select"
 
-`Number	Name
+`Number	Name`
 
-1	Ridge
+`1	Ridge`
 
-2	Anson
+`2	Anson`
 
-3	James
+`3	James`
 
-4	Tom`
+`4	Tom`
 
 
 SSH into the master node
 
 Turn off Spark-SQL verbose mode
+
 `sudo sed -i -e 's/rootCategory=INFO/rootCategory=WARN/' /etc/spark/conf/log4j.properties`
 
 run `spark-sql`
