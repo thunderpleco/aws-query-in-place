@@ -227,7 +227,7 @@ order by 2 desc;
 
 
 ###
-To create an external table partitioned by date and eventid, run the following command.
+Further test you can do at home, to create an external table partitioned by date and eventid, run the following command.
 
 
 ```sql
