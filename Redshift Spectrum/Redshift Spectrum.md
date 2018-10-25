@@ -1,6 +1,8 @@
-Connect to Redshift with SQL Workbench/J
+Use the RDP information that we have provided to you to connect to Redshift with SQL Workbench/J
 
-Create the external table, once done, you will be able to see this database "spectrum_db" in Athena, and Glue. But if you delete the databases in Glue, it doesn't affect Redshift.
+Create the external table, once done, you will be able to see this database "spectrum_db" in Athena, and Glue. 
+
+Please note your *arn:aws:iam::123456789012:role/mySpectrumRole* will be different, its in the SQL Workbench already.
 
 ```sql
 create external schema spectrum 
