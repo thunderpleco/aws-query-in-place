@@ -23,7 +23,7 @@ run `spark-sql`
 
 Create a view 
 ```sql
-CREATE TEMPORARY VIEW MyView (number INT, name STRING) USING s3selectCSV OPTIONS (path "s3://ridge-temp-emr-presto-s3-select/spark-select.csv", header "true", delimiter "\t")
+CREATE TEMPORARY VIEW MyView (number INT, name STRING) USING s3selectCSV OPTIONS (path "s3://ridge-temp-emr-presto-s3-select/spark-select.csv", header "true", delimiter "\t");
 ```
 
 You can then query the file by using statement like:
