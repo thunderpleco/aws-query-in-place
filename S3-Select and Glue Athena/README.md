@@ -75,7 +75,8 @@ In this session, you will do the following:
 3. Optionally using AWS Glue to perform ETL to transform the data from CSV format to Parquet format. Compare query performance using Athena.  
 
 Sample Data used consists of all the rides for the green new york city taxis for the month of January 2017.
-Sample File Location: Amazon S3 bucket named s3://aws-bigdata-blog/artifacts/glue-data-lake/data/.
+Sample File Location: Amazon S3 bucket named"
+`s3://aws-bigdata-blog/artifacts/glue-data-lake/data/`
 
 ## Discover the data as is and query in place
 
