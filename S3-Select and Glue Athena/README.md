@@ -27,7 +27,7 @@ Sample File Location: The two files are available in a public s3 bucket: anson-u
 ## S3 Select Builder Instruction:
 1. Review the python script provided in this repository, "s3-select-compare-small.py" and "s3-select-compare-large.py". 
 
-2. Launch the pre-created cloud 9 environment on AWS in us-east-1 region. 
+2. Launch the pre-created cloud 9 environment on AWS in us-west-2 oregon region. 
 
 3. Run the s3-select-small.py a couple times to observe the difference between query with and without s3 select. 
 
@@ -80,7 +80,7 @@ Sample File Location: Amazon S3 bucket named"
 
 ## Discover the data as is and query in place
 
-1. Select AWS Glue in AWS console. Choose the us-east-1 AWS Region. Add database, in Database name, type nycitytaxi, and choose Create.
+1. Select AWS Glue in AWS console. Choose the us-west-2 AWS Region. Add database, in Database name, type nycitytaxi, and choose Create.
 
 2. Choose Tables in the navigation pane. A table consists of the names of columns, data type definitions, and other metadata about a dataset. There should be no table at the moment. 
 
