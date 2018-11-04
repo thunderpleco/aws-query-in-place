@@ -19,59 +19,65 @@ Sample Data Description: Two CSV files which contains a list of airport name, co
 1. One small size file, 6M, with ~50k rows of records. 
 2. Another large size file, 500M, with 4 millions rows of records. 
 
-Sample File Location: The two files are available in a public s3 bucket: anson-us-east-1.
-
 ## S3 Select Builder Instruction:
 
-1. Launch the pre-created cloud 9 environment on AWS in us-east-1 region. 
+1. Go to S3 console and find the bucket called builder[x]-us-east-1, find the sample data file, and click the tab called "Select From".
 
-2. Review the pre-loaded python scripts, "s3-select-compare-small.py" and "s3-select-compare-large.py". 
+2. Tick "File has header row", Run "Preview", and below SQL expression. 
 
-3. Run the s3-select-small.py a couple times to observe the difference between query with and without s3 select. 
+```sql
+select name, municipality  from s3object s where municipality = 'Las Vegas' 
+```
 
-4. Run the s3-select-large.py a couple times to observe the difference between query with and without s3 select. 
+3. Launch the pre-created cloud 9 environment on AWS in us-west-2 Oregon region. 
+
+4. Review the python script provided in this repository, "s3-select-compare-small.py" and "s3-select-compare-large.py". 
+
+5. Run the s3-select-small.py a couple times to observe the difference between query with and without s3 select. 
+
+6. Run the s3-select-large.py a couple times to observe the difference between query with and without s3 select. 
 
 ## Glacier Select Builder Instruction:
 
 1. Watch the demo. 
 
-# Topic 2 - Glue and Athena
+# Section 2 - Glue and Athena
 
 In this session, you will do the following:
 1. Discover the data as is using AWS Glue. 
 2. Query the data using the Athena, with the metadata discovered by AWS Glue. 
+3. Optionally using AWS Glue to perform ETL to transform the data from CSV format to Parquet format. Compare query performance using Athena.  
 
-Sample Data used consists of all the rides for the new york city green taxis for the month of January 2017.
+Sample Data used consists of all the rides for the green new york city taxis for the month of January 2017.
 Sample File Location: Amazon S3 bucket named s3://aws-bigdata-blog/artifacts/glue-data-lake/data/.
 
 ## Discover the data as is and query in place
 
-1. Select AWS Glue in AWS console. Choose the us-east-1 AWS Region. Add database, in Database name, type nycitytaxi, and choose Create.
+1. Select AWS Glue in AWS console. Choose the us-west-2 AWS Region. Add a new ddatabase, in Database name, type nycitytaxi, and choose Create.
 
-2. Choose Tables in the navigation pane. A table consists of the names of columns, data type definitions, and other metadata about a dataset. There should be no table at the moment. 
+2. Add a table to the database nycitytaxi by using a crawler. A crawler is a program that connects to a data store and progresses through a prioritized list of classifiers to determine the schema for your data. AWS Glue provides classifiers for common file types like CSV, JSON, Avro, and others. You can also write your own classifier using a grok pattern.
 
-3. Add a table to the database nycitytaxi by using a crawler. A crawler is a program that connects to a data store and progresses through a prioritized list of classifiers to determine the schema for your data. AWS Glue provides classifiers for common file types like CSV, JSON, Avro, and others. You can also write your own classifier using a grok pattern.
+3. To add a crawler, enter the data source: an Amazon S3 bucket named s3://aws-bigdata-blog/artifacts/glue-data-lake/data/. 
 
-4. To add a crawler, enter the data source: an Amazon S3 bucket named s3://aws-bigdata-blog/artifacts/glue-data-lake/data/. 
+4. For IAM role, create a role AWSGlueServiceRole-Default. Make sure it has S3 full access. 
 
-6. For IAM role, create a role AWSGlueServiceRole-Default. Make sure it has S3 full access. 
+5. For Frequency, choose Run on demand. The crawler can be run on demand or set to run on a schedule.
 
-7. For Frequency, choose Run on demand. The crawler can be run on demand or set to run on a schedule.
+6. For Database, choose nycitytaxi.
 
-8. For Database, choose nycitytaxi.
+7. Review the steps, and choose Finish. The crawler is ready to run. Choose Run it now. When the crawler has finished, one table has been added.
 
-9. Review the steps, and choose Finish. The crawler is ready to run. Choose Run it now. When the crawler has finished, one table has been added.
+8. Choose Tables in the left navigation pane, and then choose data. This screen describes the table, including schema, properties, and other valuable information.
 
-10. Choose Tables in the left navigation pane, and then choose data. This screen describes the table, including schema, properties, and other valuable information.
-
-11. You can query the data using standard SQL.
+9. You can query the data using standard SQL.
 
     Choose the nytaxigreenparquet
     Type `sql Select * From "nycitytaxi"."data" limit 10;`
     Choose Run Query.
-    
 
 ## Athena New Feature: Creating a Table from Query Results (CTAS)
+
+Run below CTAS queries:
 
 ```sql
 CREATE TABLE nyctaxi_new_table AS 
@@ -89,9 +95,9 @@ FROM "data";
 ```
 
 ```sql
-CREATE TABLE nyctaxi_new_table_pq
+CREATE TABLE nyctaxi_new_table_pq_snappy
 WITH (
-      external_location='s3://builder0-us-east-1/nyctaxi_pq'
+      external_location='s3://builder[x]-us-west-2/nyctaxi_pq_snappy',
       format = 'Parquet',
       parquet_compression = 'SNAPPY')
 AS SELECT *
