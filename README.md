@@ -1,3 +1,105 @@
+# Query-In-Place Builder Session
+
+AWS Accounts:
+
+builder1 https://464361240967.signin.aws.amazon.com/console
+
+builder2 https://725012194027.signin.aws.amazon.com/console
+
+builder3 https://606504329419.signin.aws.amazon.com/console
+
+builder4 https://245730503502.signin.aws.amazon.com/console
+
+builder5 https://485158749081.signin.aws.amazon.com/console
+
+
+# Topic 1 - S3 Select and Glacier Select
+
+Sample Data Description: Two CSV files which contains a list of airport name, code, location, etc. 
+1. One small size file, 6M, with ~50k rows of records. 
+2. Another large size file, 500M, with 4 millions rows of records. 
+
+Sample File Location: The two files are available in a public s3 bucket: anson-us-east-1.
+
+## S3 Select Builder Instruction:
+
+1. Launch the pre-created cloud 9 environment on AWS in us-east-1 region. 
+
+2. Review the pre-loaded python scripts, "s3-select-compare-small.py" and "s3-select-compare-large.py". 
+
+3. Run the s3-select-small.py a couple times to observe the difference between query with and without s3 select. 
+
+4. Run the s3-select-large.py a couple times to observe the difference between query with and without s3 select. 
+
+## Glacier Select Builder Instruction:
+
+1. Watch the demo. 
+
+# Topic 2 - Glue and Athena
+
+In this session, you will do the following:
+1. Discover the data as is using AWS Glue. 
+2. Query the data using the Athena, with the metadata discovered by AWS Glue. 
+
+Sample Data used consists of all the rides for the new york city green taxis for the month of January 2017.
+Sample File Location: Amazon S3 bucket named s3://aws-bigdata-blog/artifacts/glue-data-lake/data/.
+
+## Discover the data as is and query in place
+
+1. Select AWS Glue in AWS console. Choose the us-east-1 AWS Region. Add database, in Database name, type nycitytaxi, and choose Create.
+
+2. Choose Tables in the navigation pane. A table consists of the names of columns, data type definitions, and other metadata about a dataset. There should be no table at the moment. 
+
+3. Add a table to the database nycitytaxi by using a crawler. A crawler is a program that connects to a data store and progresses through a prioritized list of classifiers to determine the schema for your data. AWS Glue provides classifiers for common file types like CSV, JSON, Avro, and others. You can also write your own classifier using a grok pattern.
+
+4. To add a crawler, enter the data source: an Amazon S3 bucket named s3://aws-bigdata-blog/artifacts/glue-data-lake/data/. 
+
+6. For IAM role, create a role AWSGlueServiceRole-Default. Make sure it has S3 full access. 
+
+7. For Frequency, choose Run on demand. The crawler can be run on demand or set to run on a schedule.
+
+8. For Database, choose nycitytaxi.
+
+9. Review the steps, and choose Finish. The crawler is ready to run. Choose Run it now. When the crawler has finished, one table has been added.
+
+10. Choose Tables in the left navigation pane, and then choose data. This screen describes the table, including schema, properties, and other valuable information.
+
+11. You can query the data using standard SQL.
+
+    Choose the nytaxigreenparquet
+    Type `sql Select * From "nycitytaxi"."data" limit 10;`
+    Choose Run Query.
+    
+
+## Athena New Feature: Creating a Table from Query Results (CTAS)
+
+```sql
+CREATE TABLE nyctaxi_new_table AS 
+SELECT * 
+FROM "data";
+```
+
+```sql
+CREATE TABLE nyctaxi_new_table_pq
+WITH (
+      format = 'Parquet',
+      parquet_compression = 'SNAPPY')
+AS SELECT *
+FROM "data";
+```
+
+```sql
+CREATE TABLE nyctaxi_new_table_pq
+WITH (
+      external_location='s3://builder0-us-east-1/nyctaxi_pq'
+      format = 'Parquet',
+      parquet_compression = 'SNAPPY')
+AS SELECT *
+FROM "data";
+```
+
+# Topic 3 - Redshift Spectrum
+
 Use the RDP information that we have provided to you to connect to Redshift with SQL Workbench/J
 
 Create the external table, once done, you will be able to see this database "spectrum_db" in Athena, and Glue. 
