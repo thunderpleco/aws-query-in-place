@@ -19,17 +19,23 @@ Sample Data Description: Two CSV files which contains a list of airport name, co
 1. One small size file, 6M, with ~50k rows of records. 
 2. Another large size file, 500M, with 4 millions rows of records. 
 
-Sample File Location: The two files are available in a public s3 bucket: anson-us-east-1.
-
 ## S3 Select Builder Instruction:
 
-1. Launch the pre-created cloud 9 environment on AWS in us-east-1 region. 
+1. Go to S3 console and find the bucket called builder[x]-us-east-1, find the sample data file, and click the tab called "Select From".
 
-2. Review the pre-loaded python scripts, "s3-select-compare-small.py" and "s3-select-compare-large.py". 
+2. Tick "File has header row", Run "Preview", and below SQL expression. 
 
-3. Run the s3-select-small.py a couple times to observe the difference between query with and without s3 select. 
+```sql
+select name, municipality  from s3object s where municipality = 'Las Vegas' 
+```
 
-4. Run the s3-select-large.py a couple times to observe the difference between query with and without s3 select. 
+3. Launch the pre-created cloud 9 environment on AWS in us-east-1 region. 
+
+4. Review the python script provided in this repository, "s3-select-compare-small.py" and "s3-select-compare-large.py". 
+
+6. Run the s3-select-small.py a couple times to observe the difference between query with and without s3 select. 
+
+7. Run the s3-select-large.py a couple times to observe the difference between query with and without s3 select. 
 
 ## Glacier Select Builder Instruction:
 
