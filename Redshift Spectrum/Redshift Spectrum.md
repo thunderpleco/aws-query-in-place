@@ -1,4 +1,4 @@
-Use the RDP information that we have provided to you to connect to Redshift with SQL Workbench/J
+Use the RDP information that we have provided to you to connect to Redshift with *SQL Workbench/J*
 
 Create the external table, once done, you will be able to see this database "spectrum_db" in Athena, and Glue. 
 
@@ -13,7 +13,7 @@ create external database if not exists;
 ```
 
 
-To verify, you can check it at Athena console, or run the below query in SQL Workbench/J
+To verify, you can check it at Athena console, or run the below query in *SQL Workbench/J*
 
 ```sql
 select * from svv_external_schemas where schemaname='spectrum';
