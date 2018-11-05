@@ -1,83 +1,82 @@
-# Query-In-Place Builder Session
+# Query-In-Place Workshop
+
+This document proivdes the instruction for AWS builder session.
+Understanding of a data lake construct, AWS S3 Select, Glacier Select, Athena and Glue is recommended. 
 
 AWS Accounts:
 
-builder1 https://464361240967.signin.aws.amazon.com/console
+builder1 **https://464361240967.signin.aws.amazon.com/console**
 
-builder2 https://725012194027.signin.aws.amazon.com/console
+builder2 **https://725012194027.signin.aws.amazon.com/console**
 
-builder3 https://606504329419.signin.aws.amazon.com/console
+builder3 **https://606504329419.signin.aws.amazon.com/console**
 
-builder4 https://245730503502.signin.aws.amazon.com/console
+builder4 **https://245730503502.signin.aws.amazon.com/console**
 
-builder5 https://485158749081.signin.aws.amazon.com/console
+builder5 **https://485158749081.signin.aws.amazon.com/console**
 
 
 # Topic 1 - S3 Select and Glacier Select
 
-Sample Data Description: Two CSV files which contains a list of airport name, code, location, etc. 
+**Sample Data**: Two CSV files which contains a list of airport name, code, location, etc. 
 1. One small size file, 6M, with ~50k rows of records. 
 2. Another large size file, 500M, with 4 millions rows of records. 
 
 ## S3 Select Builder Instruction:
 
-1. Go to S3 console and find the bucket called builder[x]-us-east-1, find the sample data file, and click the tab called "Select From".
+1. Go to S3 console and find the bucket called **builder[x]-us-west-2**, find the sample data file, and click the tab called **"Select From"**.
 
-2. Tick "File has header row", Run "Preview", and below SQL expression. 
+2. Tick **"File has header row"**, Run **"Preview"**, as well as the following SQL query:
 
 ```sql
 select name, municipality  from s3object s where municipality = 'Las Vegas' 
 ```
 
-3. Launch the pre-created cloud 9 environment on AWS in us-west-2 Oregon region. 
+3. Launch the pre-created cloud 9 environment on AWS in **us-west-2** Oregon region. 
 
-4. Review the python script provided in this repository, "s3-select-compare-small.py" and "s3-select-compare-large.py". 
+4. Review the pre-loaded python script, **"s3-select-compare-small.py"** and **"s3-select-compare-large.py"**. 
 
-5. Run the s3-select-small.py a couple times to observe the difference between query with and without s3 select. 
+5. Run the **s3-select-small.py** a couple times to observe the difference between query with and without s3 select. 
 
-6. Run the s3-select-large.py a couple times to observe the difference between query with and without s3 select. 
+6. Run the **s3-select-large.py** a couple times to observe the difference between query with and without s3 select. 
 
 ## Glacier Select Builder Instruction:
 
-1. Watch the demo. 
+1. Watch the demo, which shows the difference between normal Glacier retrival and Glacier Select. 
 
-# Section 2 - Glue and Athena
+# Topic 2 - Glue and Athena
+ 
+**Sample Data**: Infomation of the rides for the green new york city taxis for the month of January 2017.
 
-In this session, you will do the following:
-1. Discover the data as is using AWS Glue. 
-2. Query the data using the Athena, with the metadata discovered by AWS Glue. 
-3. Optionally using AWS Glue to perform ETL to transform the data from CSV format to Parquet format. Compare query performance using Athena.  
-
-Sample Data used consists of all the rides for the green new york city taxis for the month of January 2017.
-Sample File Location: Amazon S3 bucket named s3://aws-bigdata-blog/artifacts/glue-data-lake/data/.
+Sample File Location: Amazon S3 bucket named **s3://aws-bigdata-blog/artifacts/glue-data-lake/data/**.
 
 ## Discover the data as is and query in place
 
-1. Select AWS Glue in AWS console. Choose the us-west-2 AWS Region. Add a new ddatabase, in Database name, type nycitytaxi, and choose Create.
+1. Select AWS Glue in AWS console. Choose the **us-west-2** AWS Region. Add a new ddatabase, in Database name, type **nycitytaxi**, and choose Create.
 
-2. Add a table to the database nycitytaxi by using a crawler. A crawler is a program that connects to a data store and progresses through a prioritized list of classifiers to determine the schema for your data. AWS Glue provides classifiers for common file types like CSV, JSON, Avro, and others. You can also write your own classifier using a grok pattern.
+2. Add a table to the database **nycitytaxi** by using a crawler. Choose crawler, add crawler, enter the data source: an Amazon S3 bucket named **s3://aws-bigdata-blog/artifacts/glue-data-lake/data/**. 
 
-3. To add a crawler, enter the data source: an Amazon S3 bucket named s3://aws-bigdata-blog/artifacts/glue-data-lake/data/. 
-
-4. For IAM role, create a role AWSGlueServiceRole-Default. Make sure it has S3 full access. 
+4. For IAM role, create a role e.g. **AWSGlueServiceRole-Default**. 
 
 5. For Frequency, choose Run on demand. The crawler can be run on demand or set to run on a schedule.
 
-6. For Database, choose nycitytaxi.
+6. For Database, choose **nycitytaxi**.
 
-7. Review the steps, and choose Finish. The crawler is ready to run. Choose Run it now. When the crawler has finished, one table has been added.
+7. Review the steps, and choose Finish. The crawler is ready to run. Choose **Run it now**. When the crawler has finished, one table has been added.
 
-8. Choose Tables in the left navigation pane, and then choose data. This screen describes the table, including schema, properties, and other valuable information.
+8. Choose Tables in the left navigation pane, and then choose table **"data"**. This screen describes the table, including schema, properties, and other valuable information. You can preview the table. 
 
-9. You can query the data using standard SQL.
+9. You can query the data using standard SQL, such as:
 
-    Choose the nytaxigreenparquet
-    Type `sql Select * From "nycitytaxi"."data" limit 10;`
-    Choose Run Query.
+```sql 
+Select * From "nycitytaxi"."data" limit 10;
+```
+
+
 
 ## Athena New Feature: Creating a Table from Query Results (CTAS)
+A CREATE TABLE AS SELECT (CTAS) query creates a new table in Athena from the results of a SELECT statement from another query. Athena stores data files created by the CTAS statement in a specified location in Amazon S3. Try to run below sample queries. 
 
-Run below CTAS queries:
 
 ```sql
 CREATE TABLE nyctaxi_new_table AS 
