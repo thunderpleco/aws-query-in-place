@@ -48,7 +48,7 @@ select name, municipality  from s3object s where municipality = 'Las Vegas'
  
 **Sample Data**: Infomation of the rides for the green new york city taxis for the month of January 2017.
 
-Sample File Location: Amazon S3 bucket named **s3://aws-bigdata-blog/artifacts/glue-data-lake/data/**.
+Sample File Location: Amazon S3 bucket named **s3://aws-bigdata-blog/artifacts/glue-data-lake/data/**
 
 ## Discover the data as is and query in place
 
@@ -75,7 +75,7 @@ Select * From "nycitytaxi"."data" limit 10;
 
 
 ## Athena New Feature: Creating a Table from Query Results (CTAS)
-A CREATE TABLE AS SELECT (CTAS) query creates a new table in Athena from the results of a SELECT statement from another query. Athena stores data files created by the CTAS statement in a specified location in Amazon S3. Try to run below sample queries. 
+A CREATE TABLE AS SELECT (CTAS) query creates a new table in Athena from the results of a SELECT statement from another query. Athena stores data files created by the CTAS statement in a specified location in **Amazon S3**. Try to run below sample queries. 
 
 
 ```sql
@@ -105,11 +105,11 @@ FROM "data";
 
 # Topic 3 - Redshift Spectrum
 
-Use the RDP information that we have provided to you to connect to Redshift with SQL Workbench/J
+Use the RDP information that we have provided to you to connect to **Amazon Redshift** with **SQL Workbench/J**
 
-Create the external table, once done, you will be able to see this database "spectrum_db" in Athena, and Glue. 
+Create the external table, once done, you will be able to see this database "spectrum_db" in **Amazon Athena**, and **AWS Glue*. 
 
-Please note your *arn:aws:iam::123456789012:role/mySpectrumRole* will be different, its in the SQL Workbench already.
+Please note your **arn:aws:iam::123456789012:role/mySpectrumRole** will be different, its in the SQL Workbench already.
 
 ```sql
 create external schema spectrum 
@@ -120,14 +120,14 @@ create external database if not exists;
 ```
 
 
-To verify, you can check it at Athena console, or run the below query in SQL Workbench/J
+To verify, you can check it at **Amazon Athena** console, or run the below query in **SQL Workbench/J**
 
 ```sql
 select * from svv_external_schemas where schemaname='spectrum';
 ```
 
 
-Then, we create the sales table, once its done, you can directly query it from Athena (Keep your larger fact tables in Amazon S3 and your smaller dimension tables in Amazon Redshift, as a best practice:
+Then, we create the sales table, once its done, you can directly query it from **Amazon Athena** (Keep your larger fact tables in **Amazon S3** and your smaller dimension tables in **Amazon Redshift**, as a best practice:
 
 ```sql
 create external table spectrum.sales(
@@ -178,7 +178,7 @@ delimiter '|' timeformat 'YYYY-MM-DD HH:MI:SS' region 'us-west-2';
 >Load into table 'event' completed, 8798 record(s) loaded successfully.
 
 
-The following example joins the external table SPECTRUM.SALES with the local table EVENT to find the total sales for the top ten events.
+The following example joins the external table **SPECTRUM.SALES** with the local table EVENT to find the total sales for the top ten events.
 
 
 ```sql
@@ -204,7 +204,7 @@ order by 2 desc;
 ```
 
 
-By default, Amazon Redshift creates external tables with the pseudocolumns $path and $size. Select these columns to view the path to the data files on Amazon S3 and the size of the data files for each row returned by a query. 
+By default, Amazon Redshift creates external tables with the pseudocolumns **$path** and **$size**. Select these columns to view the path to the data files on Amazon S3 and the size of the data files for each row returned by a query. 
 
 ```sql
 select "$path", "$size" from spectrum.sales where dateid = '1983';
@@ -255,62 +255,10 @@ add partition(saledate='2008-03')
 location 's3://awssampledbuswest2/tickit/spectrum/sales_partition/saledate=2008-03/';
 ```
 
-```sql 
-alter table spectrum.sales_part
-add partition(saledate='2008-04') 
-location 's3://awssampledbuswest2/tickit/spectrum/sales_partition/saledate=2008-04/';
-```
-
-```sql 
-alter table spectrum.sales_part
-add partition(saledate='2008-05') 
-location 's3://awssampledbuswest2/tickit/spectrum/sales_partition/saledate=2008-05/';
-```
-
-```sql 
-alter table spectrum.sales_part
-add partition(saledate='2008-06') 
-location 's3://awssampledbuswest2/tickit/spectrum/sales_partition/saledate=2008-06/';
-```
-
-```sql 
-alter table spectrum.sales_part
-add partition(saledate='2008-07') 
-location 's3://awssampledbuswest2/tickit/spectrum/sales_partition/saledate=2008-07/';
-```
-
-```sql 
-alter table spectrum.sales_part
-add partition(saledate='2008-08') 
-location 's3://awssampledbuswest2/tickit/spectrum/sales_partition/saledate=2008-08/';
-```
-
-```sql 
-alter table spectrum.sales_part
-add partition(saledate='2008-09') 
-location 's3://awssampledbuswest2/tickit/spectrum/sales_partition/saledate=2008-09/';
-```
-
-```sql 
-alter table spectrum.sales_part
-add partition(saledate='2008-10') 
-location 's3://awssampledbuswest2/tickit/spectrum/sales_partition/saledate=2008-10/';
-```
-
-```sql 
-alter table spectrum.sales_part
-add partition(saledate='2008-11') 
-location 's3://awssampledbuswest2/tickit/spectrum/sales_partition/saledate=2008-11/';
-```
-
-```sql 
-alter table spectrum.sales_part
-add partition(saledate='2008-12') 
-location 's3://awssampledbuswest2/tickit/spectrum/sales_partition/saledate=2008-12/';
-```
+**We only need to partition several months, as we will use 2008-01 in our next query, let's just partition 3 of them to understand how it works, and you can feel free to partition more months and use them in your own query later.**
 
 
-To view external table partitions, query the SVV_EXTERNAL_PARTITIONS system view.
+To view external table partitions, query the **SVV_EXTERNAL_PARTITIONS** system view.
 
 ```sql
 select schemaname, tablename, values, location from svv_external_partitions
@@ -332,12 +280,12 @@ order by 2 desc;
 ```
 
 
-You can monitor Amazon Redshift Spectrum queries using the following system views:
+You can monitor **Amazon Redshift Spectrum** queries using the following system views:
 
 `SVL_S3QUERY`
 
-Use the SVL_S3QUERY view to get details about Redshift Spectrum queries (S3 queries) at the segment and node slice level.
+Use the **SVL_S3QUERY** view to get details about **Amazon Redshift Spectrum** queries (S3 queries) at the segment and node slice level.
 
 `SVL_S3QUERY_SUMMARY`
 
-Use the SVL_S3QUERY_SUMMARY view to get a summary of all Amazon Redshift Spectrum queries (S3 queries) that have been run on the system.
+Use the **SVL_S3QUERY_SUMMARY** view to get a summary of all **Amazon Redshift Spectrum** queries (Amazon S3 queries) that have been run on the system.
