@@ -146,7 +146,7 @@ select * from svv_external_schemas where schemaname='spectrum';
 ```
 
 
-Then, we create the sales table, once its done, you can directly query it from **Amazon Athena** (Keep your larger fact tables in **Amazon S3** and your smaller dimension tables in **Amazon Redshift**, as a best practice:
+The following example creates a table named SALES in the Amazon Redshift external schema named spectrum. The data is in tab-delimited text files. Once done, you can directly query it from **Amazon Athena** (Keep your larger fact tables in **Amazon S3** and your smaller dimension tables in **Amazon Redshift**, as one of the best practices:
 
 ```sql
 create external table spectrum.sales(
@@ -168,13 +168,13 @@ table properties ('numRows'='172000');
 ```
 
 
-To verify:
+To check how many records count:
 
 ```sql
 select count(*) from spectrum.sales;
 ```
 
-Now, let's create the smaller table:
+Now, let's create the smaller table in Amazon Redshift:
 
 ```sql
 create table event(
@@ -186,7 +186,7 @@ eventname varchar(200),
 starttime timestamp);
 ```
 
-Load the data to Event table (small table, less than 10K records):
+Load the data to Event table in the Amazon Redshift (small table, less than 10K records):
 
 ```sql
 copy event from 's3://awssampledbuswest2/tickit/allevents_pipe.txt' 
@@ -308,3 +308,7 @@ Use the **SVL_S3QUERY** view to get details about **Amazon Redshift Spectrum** q
 `SVL_S3QUERY_SUMMARY`
 
 Use the **SVL_S3QUERY_SUMMARY** view to get a summary of all **Amazon Redshift Spectrum** queries (Amazon S3 queries) that have been run on the system.
+
+
+
+
