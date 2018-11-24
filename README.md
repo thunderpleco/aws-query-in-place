@@ -75,15 +75,15 @@ Sample File Location: Amazon S3 bucket named **s3://aws-bigdata-blog/artifacts/g
 
 2. Add a table to the database **nycitytaxi** by using a crawler. Choose crawler, add crawler, enter the data source: an Amazon S3 bucket named **s3://aws-bigdata-blog/artifacts/glue-data-lake/data/** 
 
-4. For IAM role, create a role e.g. **AWSGlueServiceRole-builderxxxx**. 
+3. For IAM role, create a role e.g. **AWSGlueServiceRole-builderxxxx**. 
 
-5. For Frequency, choose Run on demand. The crawler can be run on demand or set to run on a schedule.
+4. For Frequency, choose Run on demand. The crawler can be run on demand or set to run on a schedule.
 
-6. For Database, choose **nycitytaxi**.
+5. For Database, choose **nycitytaxi**.
 
-7. Review the steps, and choose Finish. The crawler is ready to run. Choose **Run it now**. When the crawler has finished, one table has been added.
+6. Review the steps, and choose Finish. The crawler is ready to run. Choose **Run it now**. When the crawler has finished, one table has been added.
 
-8. Choose Tables in the left navigation pane, and then choose table **"data"**. This screen describes the table, including schema, properties, and other valuable information. You can preview the table. 
+7. Now, let's go to Athena, choose Tables in the left navigation pane, and then choose table **"data"**. This screen describes the table, including schema, properties, and other valuable information. You can preview the table. 
 
 9. You can query the data using standard SQL, such as:
 
