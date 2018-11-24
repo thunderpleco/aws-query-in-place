@@ -126,6 +126,8 @@ FROM "data";
 
 Use the RDP information that we have provided to you to connect to **Amazon Redshift** with **SQL Workbench/J**
 
+As **SQL Workbench/J** is already opened, please go to menu "File", "Connect Window" to re-establish the connection to **Amazon Redshift**
+
 Create the external table, once done, you will be able to see this database "spectrum_db" in **Amazon Athena**, and **AWS Glue*. 
 
 Please note your **arn:aws:iam::123456789012:role/mySpectrumRole** will be different, its in the SQL Workbench already.
