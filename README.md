@@ -63,6 +63,15 @@ select name, municipality  from s3object s where municipality = 'Las Vegas'
 
 1. Watch the demo, which shows the difference between normal Glacier retrival and Glacier Select. 
 
+## Price comparison:
+S3 Select Stats details bytesScanned: 
+507532483 
+S3 Select Stats details bytesReturned: 
+56525 
+
+For query with large data sets (500MB), $0.001 with S3 Select; it costs $0.01 wihtout S3 Select, there is a 10 times difference.
+
+
 # Topic 2 - Glue and Athena
  
 **Sample Data**: Infomation of the rides for the green new york city taxis for the month of January 2017.
