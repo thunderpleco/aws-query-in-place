@@ -310,5 +310,5 @@ Use the **SVL_S3QUERY** view to get details about **Amazon Redshift Spectrum** q
 Use the **SVL_S3QUERY_SUMMARY** view to get a summary of all **Amazon Redshift Spectrum** queries (Amazon S3 queries) that have been run on the system.
 
 
-
-
+##Additional workshop material:
+https://github.com/thunderpleco/aws-query-in-place
