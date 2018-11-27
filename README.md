@@ -131,7 +131,7 @@ AS SELECT *
 FROM "data";
 ```
 
-`For exmaple: if you are using workstation1, then you should use builder1, workstation2 -> builder2, etc.`
+`For exmaple: if you are using workstation1, then you should use s3://builder1-us-west-2/nyctaxi_pq_snappy, workstation2 -> s3://builder2-us-west-2/nyctaxi_pq_snappy, etc.`
 
 # Topic 3 - Amazon Redshift Spectrum
 
