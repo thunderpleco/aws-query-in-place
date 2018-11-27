@@ -1,7 +1,7 @@
 # Query-In-Place Workshop
 
 This document proivdes the instruction for AWS builder session.
-Understanding of a data lake construct, AWS S3 Select, Glacier Select, Athena and Glue is recommended. 
+Understanding of a data lake construct, Amazon S3 Select, Amazon Glacier Select, Amazon Athena and AWS Glue is recommended. 
 
 AWS Accounts:
 
@@ -35,15 +35,15 @@ Workstation5
 
 
 
-# Topic 1 - S3 Select and Glacier Select
+# Topic 1 - Amazon S3 Select and Amazon Glacier Select
 
 **Sample Data**: Two CSV files which contains a list of airport name, code, location, etc. 
 1. One small size file, 6M, with ~50k rows of records. 
 2. Another large size file, 500M, with 4 millions rows of records. 
 
-## S3 Select Builder Instruction:
+## Amazon S3 Select Builder Instruction:
 
-1. Go to S3 console and find the bucket called **builder[x]-us-west-2**, find the sample data file, and click the tab called **"Select From"**.
+1. Go to Amazon S3 console and find the bucket called **builder[x]-us-west-2**, find the sample data file, and click the tab called **"Select From"**.
 
 2. Tick **"File has header row"**, Run **"Preview"**, as well as the following SQL query:
 
@@ -51,17 +51,17 @@ Workstation5
 select name, municipality  from s3object s where municipality = 'Las Vegas' 
 ```
 
-3. Launch the pre-created cloud 9 environment on AWS in **us-west-2** Oregon region. 
+3. Launch the pre-created AWS cloud 9 environment on AWS in **us-west-2** Oregon region. 
 
 4. Review the pre-loaded python script, **"s3-select-compare-small.py"** and **"s3-select-compare-large.py"**. 
 
-5. Run the **s3-select-small.py** a couple times to observe the difference between query with and without s3 select. 
+5. Run the **s3-select-small.py** a couple times to observe the difference between query with and without Amazon S3 select. 
 
-6. Run the **s3-select-large.py** a couple times to observe the difference between query with and without s3 select. 
+6. Run the **s3-select-large.py** a couple times to observe the difference between query with and without Amazon S3 select. 
 
-## Glacier Select Builder Instruction:
+## Amazon Glacier Select Builder Instruction:
 
-1. Watch the demo, which shows the difference between normal Glacier retrival and Glacier Select. 
+1. Watch the demo, which shows the difference between normal Amazon Glacier retrival and Amazon Glacier Select. 
 
 ## Price comparison:
 S3 Select Stats details bytesScanned: 
@@ -69,10 +69,10 @@ S3 Select Stats details bytesScanned:
 S3 Select Stats details bytesReturned: 
 56525 
 
-For query with large data sets (500MB), $0.001 with S3 Select; it costs $0.01 wihtout S3 Select, there is a 10 times difference.
+For query with large data sets (500MB), $0.001 with Amazon S3 Select; it costs $0.01 wihtout Amazon S3 Select, there is a 10 times difference.
 
 
-# Topic 2 - Glue and Athena
+# Topic 2 - AWS Glue and Amazon Athena
  
 **Sample Data**: Infomation of the rides for the green new york city taxis for the month of January 2017.
 
@@ -84,7 +84,7 @@ Sample File Location: Amazon S3 bucket named **s3://aws-bigdata-blog/artifacts/g
 
 2. Add a table to the database **nycitytaxi** by using a crawler. Choose crawler, add crawler, enter the data source: an Amazon S3 bucket named **s3://aws-bigdata-blog/artifacts/glue-data-lake/data/** 
 
-3. For IAM role, create a role e.g. **AWSGlueServiceRole-builderxxxx**. 
+3. For AWS IAM role, create a role e.g. **AWSGlueServiceRole-builderxxxx**. 
 
 4. For Frequency, choose Run on demand. The crawler can be run on demand or set to run on a schedule.
 
@@ -92,7 +92,7 @@ Sample File Location: Amazon S3 bucket named **s3://aws-bigdata-blog/artifacts/g
 
 6. Review the steps, and choose Finish. The crawler is ready to run. Choose **Run it now**. When the crawler has finished, one table has been added.
 
-7. Now, let's go to Athena, choose Tables in the left navigation pane, and then choose table **"data"**. This screen describes the table, including schema, properties, and other valuable information. You can preview the table. 
+7. Now, let's go to Amazon Athena, choose Tables in the left navigation pane, and then choose table **"data"**. This screen describes the table, including schema, properties, and other valuable information. You can preview the table. 
 
 9. You can query the data using standard SQL, such as:
 
@@ -102,7 +102,7 @@ Select * From "nycitytaxi"."data" limit 10;
 
 
 
-## Athena New Feature: Creating a Table from Query Results (CTAS)
+## Amazon Athena New Feature: Creating a Table from Query Results (CTAS)
 A CREATE TABLE AS SELECT (CTAS) query creates a new table in Athena from the results of a SELECT statement from another query. Athena stores data files created by the CTAS statement in a specified location in **Amazon S3**. Try to run below sample queries. 
 
 
@@ -131,7 +131,7 @@ AS SELECT *
 FROM "data";
 ```
 
-# Topic 3 - Redshift Spectrum
+# Topic 3 - Amazon Redshift Spectrum
 
 Use the RDP information that we have provided to you to connect to **Amazon Redshift** with **SQL Workbench/J**
 
@@ -220,7 +220,7 @@ order by 2 desc;
 ```
 
 
-View the query plan for the previous query. Note the S3 Seq Scan, S3 HashAggregate, and S3 Query Scan steps that were executed against the data on Amazon S3.
+View the query plan for the previous query. Note the Amazon S3 Seq Scan, Amazon S3 HashAggregate, and Amazon S3 Query Scan steps that were executed against the data on Amazon S3.
 
 
 ```sql
