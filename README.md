@@ -84,7 +84,7 @@ Sample File Location: Amazon S3 bucket named **s3://aws-bigdata-blog/artifacts/g
 
 2. Add a table to the database **nycitytaxi** by using a crawler. Choose crawler, add crawler, enter the data source: an Amazon S3 bucket named **s3://aws-bigdata-blog/artifacts/glue-data-lake/data/** 
 
-3. For AWS IAM role, create a role e.g. **AWSGlueServiceRole-builderxxxx**. 
+3. For AWS IAM role, use the default role that we have created for you e.g. **AWSGlueServiceRole-xxxxxx. 
 
 4. For Frequency, choose Run on demand. The crawler can be run on demand or set to run on a schedule.
 
