@@ -131,6 +131,8 @@ AS SELECT *
 FROM "data";
 ```
 
+`For exmaple: if you are using workstation1, then you should use builder1, workstation2 -> builder2, etc.`
+
 # Topic 3 - Amazon Redshift Spectrum
 
 Use the RDP information that we have provided to you to connect to **Amazon Redshift** with **SQL Workbench/J**
@@ -148,7 +150,6 @@ database 'spectrumdb'
 iam_role 'arn:aws:iam::123456789012:role/mySpectrumRole'
 create external database if not exists;
 ```
-
 
 To verify, you can check it at **Amazon Athena** console, or run the below query in **SQL Workbench/J**
 
@@ -204,6 +205,8 @@ copy event from 's3://awssampledbuswest2/tickit/allevents_pipe.txt'
 iam_role 'arn:aws:iam::123456789012:role/mySpectrumRole'
 delimiter '|' timeformat 'YYYY-MM-DD HH:MI:SS' region 'us-west-2';
 ```
+
+`Please make sure you have replaced the complete 'arn:aws:iam::123456789012:role/mySpectrumRole' to the ones that belong to you, not just the account number.`
 
 >Load into table 'event' completed, 8798 record(s) loaded successfully.
 
