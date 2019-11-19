@@ -7,31 +7,31 @@ AWS Accounts:
 
 Workstation1 
 
-**https://464361240967.signin.aws.amazon.com/console**
+**https://xxx.signin.aws.amazon.com/console**
 
 
 
 Workstation2 
 
-**https://725012194027.signin.aws.amazon.com/console**
+**https://xxx.signin.aws.amazon.com/console**
 
 
 
 Workstation3 
 
-**https://606504329419.signin.aws.amazon.com/console**
+**https://xxx.signin.aws.amazon.com/console**
 
 
 
 Workstation4 
 
-**https://245730503502.signin.aws.amazon.com/console**
+**https://xxx.signin.aws.amazon.com/console**
 
 
 
 Workstation5 
 
-**https://485158749081.signin.aws.amazon.com/console**
+**https://xxx.signin.aws.amazon.com/console**
 
 
 
